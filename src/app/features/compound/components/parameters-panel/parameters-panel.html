@@ -1,0 +1,98 @@
+<section class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 md:p-6">
+  <h2 class="text-lg font-semibold mb-4 dark:text-slate-100">{{ 'params.title' | translate }}</h2>
+
+  <form [formGroup]="form" class="space-y-4" novalidate>
+    <div>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">{{ 'params.initial' | translate }}</label>
+      <input
+        type="number"
+        min="0"
+        formControlName="initial"
+        class="w-full rounded-xl border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900
+               text-slate-900 dark:text-slate-100
+               focus:border-slate-400 dark:focus:border-slate-500 focus:ring-slate-300 dark:focus:ring-slate-600"
+      />
+      @if (form.get('initial')?.invalid) {
+      <div class="text-xs text-rose-600 mt-1">Πρέπει να είναι ≥ 0.</div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">{{ 'params.monthly' | translate }}</label>
+      <input
+        type="number"
+        min="0"
+        formControlName="monthly"
+        class="w-full rounded-xl border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900
+               text-slate-900 dark:text-slate-100
+               focus:border-slate-400 dark:focus:border-slate-500 focus:ring-slate-300 dark:focus:ring-slate-600"
+      />
+      @if (form.get('monthly')?.invalid) {
+      <div class="text-xs text-rose-600 mt-1">Πρέπει να είναι ≥ 0.</div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
+        {{ 'params.years' | translate }}: {{ form.value.years }}
+      </label>
+      <input
+        type="range"
+        min="1"
+        max="50"
+        step="1"
+        formControlName="years"
+        class="w-full accent-slate-600 dark:accent-slate-400"
+      />
+      @if (form.get('years')?.invalid) {
+      <div class="text-xs text-rose-600 mt-1">1–50.</div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
+        {{ 'params.annual' | translate }}: {{ form.value.annualRatePct ?? 0 | number : '1.0-2' }}
+      </label>
+      <input
+        type="range"
+        min="-50"
+        max="50"
+        step="0.1"
+        formControlName="annualRatePct"
+        class="w-full accent-slate-600 dark:accent-slate-400"
+      />
+      @if (form.get('annualRatePct')?.invalid) {
+      <div class="text-xs text-rose-600 mt-1">-50% έως 50%.</div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
+        {{ 'params.inflation' | translate }}: {{ form.value.inflationPct ?? 0 | number : '1.0-1' }}
+      </label>
+      <input
+        type="range"
+        min="0"
+        max="20"
+        step="0.1"
+        formControlName="inflationPct"
+        class="w-full accent-slate-600 dark:accent-slate-400"
+      />
+      @if (form.get('inflationPct')?.invalid) {
+      <div class="text-xs text-rose-600 mt-1">0% έως 20%.</div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-2">{{ 'params.timing' | translate }}</label>
+      <app-toggle-group
+        [value]="form.value.timing || 'end'"
+        (valueChange)="onTimingChange($event)"
+      ></app-toggle-group>
+    </div>
+
+    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+      {{ 'params.note' | translate }}
+    </p>
+  </form>
+</section>

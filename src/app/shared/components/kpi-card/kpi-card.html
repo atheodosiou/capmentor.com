@@ -1,0 +1,33 @@
+<div
+  class="h-full flex flex-col justify-between rounded-xl border border-slate-200 dark:border-slate-700 p-3 md:p-4 bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 relative"
+  (mouseenter)="show()"
+  (mouseleave)="hide()"
+  (focusin)="show()"
+  (focusout)="hide()"
+>
+  <!-- Label + Info button -->
+  <div
+    class="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1 min-w-0"
+  >
+    <span class="truncate">{{ label() }}</span>
+   
+  </div>
+
+  <!-- Value -->
+  <div
+    class="text-base md:text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-100"
+  >
+    {{ value() }}
+  </div>
+
+  <!-- Tooltip -->
+  @if (open()) {
+  <div
+    [id]="tooltipId"
+    role="tooltip"
+    class="absolute right-0 top-full mt-1 max-w-[70vw] sm:max-w-56 p-2 text-xs text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg z-10"
+  >
+    {{ description() }}
+  </div>
+  }
+</div>

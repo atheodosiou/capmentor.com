@@ -1,0 +1,15 @@
+<div class="flex items-center justify-end gap-2">
+  <button
+    (click)="exportCsv()"
+    class="px-3 py-1.5 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 active:scale-95 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600"
+  >
+    {{ 'toolbar.export' | translate }}
+  </button>
+
+  <button
+    (click)="store.reset()"
+    class="px-3 py-1.5 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 active:scale-95 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600"
+  >
+    {{ 'toolbar.reset' | translate }}
+  </button>
+</div>

@@ -1,0 +1,18 @@
+<div
+  class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 md:p-6"
+>
+  <h3 class="text-base font-semibold mb-3 dark:text-slate-100">{{ 'chart.title' | translate }}</h3>
+  <apx-chart
+    class="w-full h-80"
+    [series]="series()"
+    [chart]="chart()"
+    [xaxis]="xaxis()"
+    [yaxis]="yaxis()"
+    [stroke]="stroke()"
+    [legend]="legend()"
+    [tooltip]="tooltip()"
+    [fill]="fill()"
+    [grid]="grid()"
+    [dataLabels]="dataLabels()"
+  ></apx-chart>
+</div>

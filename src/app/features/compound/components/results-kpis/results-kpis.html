@@ -1,0 +1,29 @@
+<div
+  class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 md:p-6"
+>
+  <h2 class="text-lg font-semibold mb-4 dark:text-slate-100">
+    {{ 'results.title' | translate }}
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 md:gap-4 auto-rows-fr min-w-0">
+    <app-kpi-card
+      label="{{ 'kpi.final' | translate }}"
+      [value]="fmt(store.finalBalance())"
+      description="{{ 'kpi.desc.final' | translate }}"
+    />
+    <app-kpi-card
+      label="{{ 'kpi.contrib' | translate }}"
+      [value]="fmt(store.totalContrib())"
+      description="{{ 'kpi.desc.contrib' | translate }}"
+    />
+    <app-kpi-card
+      label="{{ 'kpi.interest' | translate }}"
+      [value]="fmt(store.totalInterest())"
+      description="{{ 'kpi.desc.interest' | translate }}"
+    />
+    <app-kpi-card
+      label="{{ 'kpi.real' | translate }}"
+      [value]="fmt(store.realFinalBalance())"
+      description="{{ 'kpi.desc.real' | translate }}"
+    />
+  </div>
+</div>

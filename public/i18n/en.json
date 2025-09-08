@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Compound Interest Calculator",
+    "langBtn": {
+      "en": "English",
+      "el": "Greek"
+    }
+  },
+  "toolbar": { "export": "Export CSV", "reset": "Reset" },
+  "params": {
+    "title": "Parameters",
+    "initial": "Initial capital (€)",
+    "monthly": "Monthly contribution (€)",
+    "years": "Duration (years)",
+    "annual": "Annual return (%)",
+    "inflation": "Inflation (% yearly)",
+    "timing": "Contribution timing",
+    "end": "End of month",
+    "begin": "Beginning of month",
+    "note": "Monthly rate is (1 + annualRate)^(1/12) − 1. Results are indicative and not investment advice."
+  },
+  "results": { "title": "Results" },
+  "kpi": {
+    "final": "Final value",
+    "contrib": "Total contributions",
+    "interest": "Interest / growth",
+    "real": "Real value (final)",
+    "desc": {
+      "final": "The total amount at the end (contributions + interest).",
+      "contrib": "The sum of all the deposits you made.",
+      "interest": "The difference: Final value – Total contribution.",
+      "real": "The purchasing power of the final value, after inflation."
+    }
+  },
+  "chart": {
+    "title": "Yearly growth",
+    "legend": {
+      "nominal": "Nominal Value",
+      "real": "Real Value",
+      "contrib": "Total Contribution"
+    }
+  },
+  "table": {
+    "title": "Yearly summary",
+    "columns": {
+      "year": "Year",
+      "contrib": "Total Contribution",
+      "interest": "Total Interest",
+      "final": "Final Value",
+      "real": "Real Value"
+    }
+  },
+  "footer": {
+    "notice": "Indicative results — not investment advice.",
+    "madeby": "Built by",
+    "author": "Anastasios Theodosiou"
+  }
+}

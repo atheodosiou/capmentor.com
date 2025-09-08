@@ -1,0 +1,51 @@
+<!-- currency-ticker.html -->
+<div
+  class="w-full overflow-hidden bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100 border-t border-slate-200 dark:border-slate-700"
+>
+  <div class="relative">
+    <div class="ticker-track" [style.--speed]="speed() + 's'">
+      <!-- διπλό περιεχόμενο για seamless infinite loop -->
+      <div class="ticker-content" aria-label="currency pairs ticker">
+        @for (row of rows(); track row.pair) {
+        <div class="item">
+          <span class="pair">{{ row.pair }}</span>
+          <span class="rate">{{ row.rate | number : '1.4-4' }}</span>
+          <span
+            class="change"
+            [class.up]="(row.changePct ?? 0) > 0"
+            [class.down]="(row.changePct ?? 0) < 0"
+          >
+            @if (row.changePct !== undefined) {
+            <span class="arrow">
+              {{ (row.changePct ?? 0) > 0 ? '▲' : (row.changePct ?? 0) < 0 ? '▼' : '•' }}
+            </span>
+            <span>{{ row.changePct | number : '1.2-2' }}%</span>
+            }
+          </span>
+        </div>
+        }
+      </div>
+
+      <div class="ticker-content" aria-hidden="true">
+        @for (row of rows(); track row.pair) {
+        <div class="item">
+          <span class="pair">{{ row.pair }}</span>
+          <span class="rate">{{ row.rate | number : '1.4-4' }}</span>
+          <span
+            class="change"
+            [class.up]="(row.changePct ?? 0) > 0"
+            [class.down]="(row.changePct ?? 0) < 0"
+          >
+            @if (row.changePct !== undefined) {
+            <span class="arrow">
+              {{ (row.changePct ?? 0) > 0 ? '▲' : (row.changePct ?? 0) < 0 ? '▼' : '•' }}
+            </span>
+            <span>{{ row.changePct | number : '1.2-2' }}%</span>
+            }
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

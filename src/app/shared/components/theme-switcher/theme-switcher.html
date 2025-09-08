@@ -1,0 +1,49 @@
+<div
+  class="relative w-14 h-8 p-1 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 cursor-pointer select-none"
+  role="switch"
+  [attr.aria-checked]="isDark()"
+  tabindex="0"
+  (click)="toggle()"
+  (keydown)="onKeydown($event)"
+>
+  <!-- Icons left/right -->
+  <div
+    class="absolute inset-0 flex items-center justify-between px-1 text-slate-600 dark:text-slate-300 pointer-events-none"
+  >
+    <!-- Sun -->
+    <svg
+      class="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+      />
+    </svg>
+    <!-- Moon -->
+    <svg
+      class="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 12.79A9 9 0 1111.21 3A7 7 0 0021 12.79z" />
+    </svg>
+  </div>
+
+  <!-- Knob -->
+  <div
+    class="absolute top-[3px] left-1 h-6 w-6 rounded-full bg-white dark:bg-slate-900 shadow transition-transform duration-200"
+    [style.transform]="isDark() ? 'translateX(24px)' : 'translateX(0)'"
+  ></div>
+</div>

@@ -1,0 +1,65 @@
+:host {
+  display: block;
+}
+
+/* track + content */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: scroll linear infinite;
+  animation-duration: var(--speed, 30s);
+}
+.ticker-content {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.5rem 1rem;
+}
+
+/* items */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-variant-numeric: tabular-nums;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  /* ελαφρύ «τσιμπημα» φόντου για light */
+  background: rgba(0, 0, 0, 0.04);
+}
+:host-context(.dark) .item {
+  /* πιο ορατό chip στο dark */
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pair {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.rate {
+  opacity: 0.9;
+}
+.change {
+  margin-left: 0.25rem;
+  font-weight: 600;
+}
+.change.up {
+  color: #22c55e;
+} /* green-500 */
+.change.down {
+  color: #ef4444;
+} /* red-500 */
+
+/* animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* επειδή έχουμε διπλό περιεχόμενο */
+}
+
+/* Pause on hover (nice UX) */
+.ticker-track:hover {
+  animation-play-state: paused;
+}

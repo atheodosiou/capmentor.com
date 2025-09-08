@@ -1,0 +1,21 @@
+/* Προαιρετικά: μικρό arrow για το tooltip */
+[role='tooltip']::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(226, 232, 240, 1); /* border color */
+}
+[role='tooltip']::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #fff; /* background */
+}
