@@ -12,7 +12,7 @@ import { ThemeSwitcher } from './shared/components/theme-switcher/theme-switcher
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('compound-interest-calculator');
+  protected readonly title = signal('Capmentor.com');
   year = signal(new Date().getFullYear());
   currencyTargets = signal<string[]>(['USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD', 'CNY', 'TRY',
     'SEK', 'NOK', 'DKK', 'PLN', 'CZK', 'HUF',
