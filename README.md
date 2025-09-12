@@ -23,7 +23,7 @@ It is designed to help investors, students, and anyone interested in personal fi
 
 ### Clone the repo
 ```bash
-git clone https://github.com/your-username/compound-interest-calculator.git
+git clone git@github.com:atheodosiou/capmentor.com.git
 cd compound-interest-calculator
 ````
 
