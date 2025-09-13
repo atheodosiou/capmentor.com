@@ -1,5 +1,5 @@
 <div
-  class="relative w-14 h-8 p-1 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 cursor-pointer select-none"
+  class="relative w-14 h-8 p-1 rounded-full border border-slate-600 bg-slate-700 cursor-pointer select-none"
   role="switch"
   [attr.aria-checked]="isDark()"
   tabindex="0"
@@ -8,7 +8,7 @@
 >
   <!-- Icons left/right -->
   <div
-    class="absolute inset-0 flex items-center justify-between px-1 text-slate-600 dark:text-slate-300 pointer-events-none"
+    class="absolute inset-0 flex items-center justify-between px-1 text-slate-300 pointer-events-none"
   >
     <!-- Sun -->
     <svg
@@ -43,7 +43,7 @@
 
   <!-- Knob -->
   <div
-    class="absolute top-[3px] left-1 h-6 w-6 rounded-full bg-white dark:bg-slate-900 shadow transition-transform duration-200"
+    class="absolute top-[3px] left-1 h-6 w-6 rounded-full bg-slate-900 shadow transition-transform duration-200"
     [style.transform]="isDark() ? 'translateX(24px)' : 'translateX(0)'"
   ></div>
 </div>

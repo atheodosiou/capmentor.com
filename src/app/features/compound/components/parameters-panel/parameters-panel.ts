@@ -7,6 +7,8 @@ import { coerceNum } from '../../../../shared/utils/number.util';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DecimalPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { InflationStateService } from '../../../../core/services/inflation-state';
+
 @Component({
   selector: 'app-parameters-panel',
   imports: [ReactiveFormsModule, ToggleGroup, DecimalPipe, TranslatePipe],
@@ -17,6 +19,7 @@ export class ParametersPanel {
   private fb = inject(FormBuilder);
   private store = inject(CompoundStore);
   private destroyRef = inject(DestroyRef);
+  private inflState = inject(InflationStateService);
 
   // guard to prevent feedback loops when we patch the form from the store
   private patching = signal(false);
@@ -65,7 +68,7 @@ export class ParametersPanel {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(val => {
-        if (this.patching()) return; // skip if we’re currently syncing from store
+        if (this.patching()) return;
         this.store.patchInputs(val);
       });
 
@@ -85,6 +88,18 @@ export class ParametersPanel {
         { emitEvent: false }
       );
       this.patching.set(false);
+    });
+
+    // 4) ⬅️ InflationState -> Form (auto-fill όταν έρθουν δεδομένα)
+    effect(() => {
+      const loading = this.inflState.loading();   // αν θες μπορείς να το αγνοήσεις
+      const val = this.inflState.value();         // ΠΑΝΤΑ αριθμός (το state κάνει null->0)
+      // μόνο αν διαφέρει από το τωρινό control value, κάνε set
+      const current = this.form.get('inflationPct')!.value ?? 0;
+      if (val !== current) {
+        // Θέλουμε να σταλεί στο store; Τότε emitEvent: true
+        this.form.get('inflationPct')!.setValue(val, { emitEvent: true });
+      }
     });
   }
 
