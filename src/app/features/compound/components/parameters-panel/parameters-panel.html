@@ -1,16 +1,18 @@
-<section class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 md:p-6">
+<section
+  class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 md:p-6"
+>
   <h2 class="text-lg font-semibold mb-4 dark:text-slate-100">{{ 'params.title' | translate }}</h2>
 
   <form [formGroup]="form" class="space-y-4" novalidate>
     <div>
-      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">{{ 'params.initial' | translate }}</label>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
+        {{ 'params.initial' | translate }}
+      </label>
       <input
         type="number"
         min="0"
         formControlName="initial"
-        class="w-full rounded-xl border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900
-               text-slate-900 dark:text-slate-100
-               focus:border-slate-400 dark:focus:border-slate-500 focus:ring-slate-300 dark:focus:ring-slate-600"
+        class="w-full rounded-xl border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:border-slate-400 dark:focus:border-slate-500 focus:ring-slate-300 dark:focus:ring-slate-600"
       />
       @if (form.get('initial')?.invalid) {
       <div class="text-xs text-rose-600 mt-1">Πρέπει να είναι ≥ 0.</div>
@@ -18,14 +20,14 @@
     </div>
 
     <div>
-      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">{{ 'params.monthly' | translate }}</label>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
+        {{ 'params.monthly' | translate }}
+      </label>
       <input
         type="number"
         min="0"
         formControlName="monthly"
-        class="w-full rounded-xl border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900
-               text-slate-900 dark:text-slate-100
-               focus:border-slate-400 dark:focus:border-slate-500 focus:ring-slate-300 dark:focus:ring-slate-600"
+        class="w-full rounded-xl border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:border-slate-400 dark:focus:border-slate-500 focus:ring-slate-300 dark:focus:ring-slate-600"
       />
       @if (form.get('monthly')?.invalid) {
       <div class="text-xs text-rose-600 mt-1">Πρέπει να είναι ≥ 0.</div>
@@ -66,10 +68,66 @@
       }
     </div>
 
+    <!-- Inflation + Tooltip -->
     <div>
-      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
-        {{ 'params.inflation' | translate }}: {{ form.value.inflationPct ?? 0 | number : '1.0-1' }}
+      <label
+        class="block text-sm text-slate-600 dark:text-slate-400 mb-1 flex flex-row items-center justify-between relative"
+      >
+        <span>
+          {{ 'params.inflation' | translate }}:
+          {{ form.value.inflationPct ?? 0 | number : '1.0-1' }}
+        </span>
+
+        <button
+          type="button"
+          class="border-none text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer inline-flex items-center justify-center"
+          [attr.aria-describedby]="tooltipId"
+          aria-label="Πληροφορίες πληθωρισμού"
+          (mouseenter)="showTip()"
+          (mouseleave)="hideTip()"
+          (focusin)="showTip()"
+          (focusout)="hideTip()"
+          (keydown.escape)="hideTip()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+            />
+          </svg>
+        </button>
+
+        @if (tipOpen()) {
+        <div
+          [id]="tooltipId"
+          role="tooltip"
+          class="absolute right-0 top-full mt-1 max-w-[70vw] sm:max-w-64 p-2 text-xs text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg z-10"
+        >
+          <div class="space-y-1">
+            <div class="font-medium">
+              {{ 'params.inflation_header' | translate }} ({{ infCountry() }}, {{ infYear() }}):
+              <strong>{{ inflValue() | number : '1.0-1' }}%</strong>
+            </div>
+            <p
+              class="text-[11px] leading-snug text-slate-500 dark:text-slate-400"
+              [innerHTML]="
+                'params.inflation_disclaimer' | translate : { code: infCountry(), year: infYear() }
+              "
+            ></p>
+          </div>
+        </div>
+        }
       </label>
+
       <input
         type="range"
         min="0"
@@ -84,7 +142,9 @@
     </div>
 
     <div>
-      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-2">{{ 'params.timing' | translate }}</label>
+      <label class="block text-sm text-slate-600 dark:text-slate-400 mb-2">
+        {{ 'params.timing' | translate }}
+      </label>
       <app-toggle-group
         [value]="form.value.timing || 'end'"
         (valueChange)="onTimingChange($event)"

@@ -17,7 +17,9 @@
     "timing": "Contribution timing",
     "end": "End of month",
     "begin": "Beginning of month",
-    "note": "Monthly rate is (1 + annualRate)^(1/12) − 1. Results are indicative and not investment advice."
+    "note": "Monthly rate is (1 + annualRate)^(1/12) − 1. Results are indicative and not investment advice.",
+    "inflation_header": "Inflation",
+    "inflation_disclaimer": "The data refers to the country with code <strong>{{code}}</strong>, it is the <em>latest available</em> for the year {{year}} and comes from the World Bank API."
   },
   "results": { "title": "Results" },
   "kpi": {

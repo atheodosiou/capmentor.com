@@ -17,7 +17,7 @@ interface WbDatum {
 }
 
 export interface InflationResult {
-  country: string;   // ISO2/ISO3 που πέρασες
+  country: string;   // ISO2/ISO3 
   year: number | null;
   value: number | null;  // annual %
   source: 'current-year' | 'latest-available' | 'none';
@@ -29,10 +29,6 @@ export class InflationService {
   private base = 'https://api.worldbank.org/v2';
   private indicator = 'FP.CPI.TOTL.ZG';
 
-  /**
-   * Επιστρέφει το inflation για το ΤΡΕΧΟΝ έτος αν υπάρχει.
-   * Αν είναι null, κάνει fallback στο πιο πρόσφατο διαθέσιμο (mrnev=1).
-   */
   getCurrentYearOrLatest(countryCode: string) {
     const year = new Date().getFullYear();
     const urlYear =
@@ -51,7 +47,6 @@ export class InflationService {
             source: 'current-year',
           });
         }
-        // Fallback: πιο πρόσφατο μη-κενό
         const urlLatest =
           `${this.base}/country/${encodeURIComponent(countryCode)}/indicator/${this.indicator}` +
           `?format=json&mrnev=1`;
@@ -75,7 +70,6 @@ export class InflationService {
     );
   }
 
-  /** Πιο πρόσφατη μη-κενή τιμή (ανεξάρτητα από έτος). */
   getLatest(countryCode: string) {
     const url =
       `${this.base}/country/${encodeURIComponent(countryCode)}/indicator/${this.indicator}` +
@@ -83,7 +77,6 @@ export class InflationService {
     return this.http.get<[WbMeta, WbDatum[]]>(url);
   }
 
-  /** Επιστροφή δεδομένων για εύρος ετών (π.χ. 2015–2025). */
   getRange(countryCode: string, from: number, to: number) {
     const url =
       `${this.base}/country/${encodeURIComponent(countryCode)}/indicator/${this.indicator}` +

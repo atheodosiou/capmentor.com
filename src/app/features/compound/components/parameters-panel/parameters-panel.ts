@@ -33,8 +33,13 @@ export class ParametersPanel {
     timing: this.fb.control<'begin' | 'end'>('end', { nonNullable: true }),
   });
 
+  inflLoading = this.inflState.loading;
+  inflValue = this.inflState.value;
+  infCountry = this.inflState.country;
+  infYear = this.inflState.year;
+  infSource = this.inflState.source;
+
   constructor() {
-    // 1) Initialize form from store (once on create)
     const s = this.store.inputs();
     this.form.patchValue({
       initial: s.initial,
@@ -45,7 +50,6 @@ export class ParametersPanel {
       timing: s.timing,
     }, { emitEvent: false });
 
-    // 2) Form -> Store (debounced, distinct, with number coercion)
     this.form.valueChanges
       .pipe(
         debounceTime(50),
@@ -107,4 +111,11 @@ export class ParametersPanel {
   onTimingChange(v: 'begin' | 'end') {
     this.form.get('timing')!.setValue(v);
   }
+
+  tooltipId = 'inflation-tip-' + Math.random().toString(36).slice(2);
+  tipOpen = signal(false);
+
+  showTip() { this.tipOpen.set(true); }
+  hideTip() { this.tipOpen.set(false); }
+
 }
