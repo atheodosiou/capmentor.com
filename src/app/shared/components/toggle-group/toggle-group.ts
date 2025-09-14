@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, effect } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -9,19 +9,40 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class ToggleGroup {
   value = input<'begin' | 'end'>('end');
-
   valueChange = output<'begin' | 'end'>();
+  localValue = signal<'begin' | 'end'>(this.value());
 
-  localValue = signal(this.value() ?? 'end');
+  constructor() {
+    effect(() => this.localValue.set(this.value()));
+  }
 
   select(v: 'begin' | 'end') {
-    this.localValue.set(v);
-    this.valueChange.emit(v);
+    if (this.localValue() !== v) {
+      this.localValue.set(v);
+      this.valueChange.emit(v);
+    }
   }
 
   btnClass(which: 'begin' | 'end') {
-    const active = this.value() === which;
-    return `flex-1 rounded-xl border px-3 py-2 text-sm ${active ? 'border-slate-800 bg-slate-900 text-white' : 'border-slate-300 hover:bg-slate-50'
-      }`;
+    const active = this.localValue() === which;
+
+    const base =
+      'flex-1 rounded-xl border px-3 py-2 text-sm cursor-pointer select-none ' +
+      'transition-colors focus-visible:outline-none focus-visible:ring-2 ' +
+      'focus-visible:ring-slate-400 ring-offset-2 ring-offset-white ' +
+      'dark:ring-offset-slate-800';
+
+    if (active) {
+      return (
+        base +
+        ' border-slate-900 bg-slate-900 text-white ' +
+        ' dark:border-slate-600 dark:bg-slate-900 dark:text-white'
+      );
+    }
+    return (
+      base +
+      ' border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 ' + 
+      ' dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700 dark:hover:border-slate-500'
+    );
   }
 }

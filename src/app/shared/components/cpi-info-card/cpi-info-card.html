@@ -1,0 +1,99 @@
+<section
+  class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 md:p-6"
+>
+  <div class="flex items-center justify-between gap-2">
+    <div class="min-w-0 flex items-center gap-2">
+      <h2 class="text-base sm:text-lg font-semibold dark:text-slate-100 leading-snug truncate">
+        {{ 'info.cpi.title' | translate }}
+      </h2>
+    </div>
+
+    <button
+      type="button"
+      class="cursor-pointer shrink-0 border-none text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ring-offset-2 ring-offset-white dark:ring-offset-slate-800"
+      (click)="toggleInfo()"
+      [attr.aria-expanded]="infoOpen()"
+      [attr.aria-controls]="infoId"
+      [attr.aria-label]="'info.cpi.toggle_aria' | translate"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        class="w-5 h-5 transition-transform duration-200"
+        [class.rotate-180]="infoOpen()"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.19l3.71-3.96a.75.75 0 1 1 1.08 1.04l-4.24 4.52a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <p class="mt-2 sm:mt-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+    {{ 'info.cpi.summary' | translate }}
+  </p>
+
+  <div
+    #contentRef
+    [id]="infoId"
+    class="overflow-hidden transition-[max-height] duration-300 ease-in-out motion-reduce:transition-none"
+    [style.maxHeight.px]="infoOpen() ? contentRef.scrollHeight : 0"
+  >
+    <div class="pt-2">
+      <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        {{ 'info.cpi.detail' | translate }}
+      </p>
+
+      <p class="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+        {{ 'info.cpi.note' | translate }}
+      </p>
+
+      <div class="mt-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        <div class="sm:flex sm:items-center">
+          <span class="block sm:mr-2 mb-1 sm:mb-0">
+            {{ 'info.cpi.sources' | translate }}
+          </span>
+
+          <ul
+            class="list-disc pl-5 space-y-1 sm:list-none sm:pl-0 sm:space-y-0 sm:flex sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-1 sm:[&>li]:flex sm:[&>li]:items-center sm:[&>li]:before:content-['•'] sm:[&>li]:before:mx-2 sm:[&>li]:before:text-slate-400 sm:[&>li:first-child]:before:content-none"
+          >
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Consumer_price_index"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline hover:text-slate-900 dark:hover:text-white"
+              >
+                {{ 'info.cpi.link_wikipedia' | translate }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.ecb.europa.eu/stats/macroeconomic_and_sectoral/hicp/html/index.en.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline hover:text-slate-900 dark:hover:text-white"
+              >
+                {{ 'info.cpi.link_ecb' | translate }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline hover:text-slate-900 dark:hover:text-white"
+              >
+                {{ 'info.cpi.link_worldbank' | translate }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

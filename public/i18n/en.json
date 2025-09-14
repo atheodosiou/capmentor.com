@@ -7,6 +7,19 @@
     }
   },
   "toolbar": { "export": "Export CSV", "reset": "Reset" },
+  "info": {
+    "cpi": {
+      "title": "Consumer Price Index (CPI);",
+      "summary": "CPI measures the average change over time in the prices of a 'basket' of goods and services purchased by households.",
+      "detail": "When CPI rises, the purchasing power of money falls — the same amount buys fewer goods in the future. Over time, inflation erodes nominal returns, which is why viewing ‘real’ returns (after inflation) is meaningful.",
+      "note": "Note: CPI differs from HICP (Harmonised Index), which is widely used in the EU by the ECB/Eurostat.",
+      "sources": "Sources:",
+      "link_wikipedia": "Wikipedia (CPI)",
+      "link_ecb": "European Central Bank (HICP)",
+      "link_worldbank": "World Bank (CPI)",
+      "toggle_aria": "Toggle information"
+    }
+  },
   "params": {
     "title": "Parameters",
     "initial": "Initial capital (€)",

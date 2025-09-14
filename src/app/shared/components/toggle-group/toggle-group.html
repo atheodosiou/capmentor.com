@@ -1,6 +1,19 @@
-<div class="flex gap-2">
-  <button (click)="select('end')" [class]="btnClass('end')">{{ 'params.end' | translate }}</button>
-  <button (click)="select('begin')" [class]="btnClass('begin')">
+<div class="flex gap-2" role="group" [attr.aria-label]="'params.timing' | translate">
+  <button
+    type="button"
+    (click)="select('end')"
+    [class]="btnClass('end')"
+    [attr.aria-pressed]="localValue() === 'end'"
+  >
+    {{ 'params.end' | translate }}
+  </button>
+
+  <button
+    type="button"
+    (click)="select('begin')"
+    [class]="btnClass('begin')"
+    [attr.aria-pressed]="localValue() === 'begin'"
+  >
     {{ 'params.begin' | translate }}
   </button>
 </div>
